@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="mr">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>प्रियदर्शी निसर्गोपचार केंद्र</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <script src="https://unpkg.com/scrollreveal"></script>
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins',sans-serif;
+      scroll-behavior:smooth;
+    }
+
+    body{
+      background:#03110a;
+      color:white;
+      overflow-x:hidden;
+    }
+
+    /* LOADER */
+
+    #loader{
+      position:fixed;
+      width:100%;
+      height:100vh;
+      background:#03110a;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      flex-direction:column;
+      z-index:99999;
+    }
+
+    .loader-circle{
+      width:90px;
+      height:90px;
+      border-radius:50%;
+      border:5px solid rgba(255,255,255,0.08);
+      border-top:5px solid #2dff95;
+      animation:spin 1s linear infinite;
+      margin-bottom:20px;
+    }
+
+    @keyframes spin{
+      100%{
+        transform:rotate(360deg);
+      }
+    }
+
+    /* PARTICLES */
+
+    .particles{
+      position:fixed;
+      width:100%;
+      height:100%;
+      z-index:-1;
+      overflow:hidden;
+    }
+
+    .particles span{
+      position:absolute;
+      width:12px;
+      height:12px;
+      background:#2dff95;
+      border-radius:50%;
+      opacity:0.15;
+      bottom:-100px;
+      animation:animate 18s linear infinite;
+    }
+
+    @keyframes animate{
+
+      0%{
+        transform:translateY(0) scale(0);
+      }
+
+      100%{
+        transform:translateY(-1200px) scale(1.2);
+      }
+
+    }
+
+    /* NAVBAR */
+
+    nav{
+      position:fixed;
+      top:0;
+      width:100%;
+      padding:20px 8%;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      background:rgba(255,255,255,0.04);
+      backdrop-filter:blur(18px);
+      border-bottom:1px solid rgba(255,255,255,0.08);
+      z-index:999;
+    }
+
+    .logo{
+      font-size:32px;
+      font-weight:800;
+      color:#2dff95;
+    }
+
+    nav ul{
+      display:flex;
+      list-style:none;
+      gap:35px;
+    }
+
+    nav ul li a{
+      text-decoration:none;
+      color:white;
+      font-weight:500;
+      transition:0.4s;
+      position:relative;
+    }
+
+    nav ul li a::after{
+      content:'';
+      position:absolute;
+      width:0%;
+      height:2px;
+      background:#2dff95;
+      left:0;
+      bottom:-5px;
+      transition:0.4s;
+    }
+
+    nav ul li a:hover::after{
+      width:100%;
+    }
+
+    nav ul li a:hover{
+      color:#2dff95;
+    }
+
+    /* HERO */
+
+    .hero{
+      min-height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      padding:150px 8%;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .hero::before{
+      content:'';
+      position:absolute;
+      width:700px;
+      height:700px;
+      background:radial-gradient(circle,#19ff8f2d,transparent 70%);
+      animation:pulse 6s infinite alternate;
+    }
+
+    @keyframes pulse{
+
+      0%{
+        transform:scale(1);
+      }
+
+      100%{
+        transform:scale(1.2);
+      }
+
+    }
+
+    .hero-content{
+      position:relative;
+      z-index:2;
+      max-width:950px;
+    }
+
+    .hero-content h3{
+      color:#2dff95;
+      font-size:24px;
+      letter-spacing:3px;
+      margin-bottom:15px;
+    }
+
+    .hero-content h1{
+      font-size:90px;
+      line-height:1.1;
+      margin-bottom:25px;
+      font-weight:800;
+    }
+
+    .hero-content p{
+      font-size:22px;
+      line-height:1.9;
+      color:#d6d6d6;
+      margin-bottom:45px;
+    }
+
+    .btn{
+      display:inline-block;
+      padding:18px 45px;
+      border-radius:60px;
+      background:linear-gradient(45deg,#2dff95,#00c967);
+      color:#03110a;
+      text-decoration:none;
+      font-weight:700;
+      border:none;
+      cursor:pointer;
+      transition:0.4s;
+      box-shadow:0 10px 35px #19ff8f55;
+    }
+
+    .btn:hover{
+      transform:translateY(-8px) scale(1.05);
+    }
+
+    section{
+      padding:110px 8%;
+    }
+
+    .title{
+      text-align:center;
+      font-size:55px;
+      margin-bottom:70px;
+      color:#2dff95;
+      font-weight:800;
+    }
+
+    .glass{
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(255,255,255,0.08);
+      backdrop-filter:blur(18px);
+      border-radius:35px;
+    }
+
+    /* ABOUT */
+
+    .about{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+      gap:35px;
+    }
+
+    .about-card{
+      padding:45px;
+      transition:0.5s;
+    }
+
+    .about-card:hover{
+      transform:translateY(-10px);
+    }
+
+    .about-card h3{
+      font-size:28px;
+      color:#2dff95;
+      margin-bottom:20px;
+    }
+
+    .about-card p{
+      line-height:2;
+      color:#d8d8d8;
+      font-size:18px;
+    }
+
+    /* HEALING */
+
+    .healing{
+      padding:60px;
+      text-align:center;
+    }
+
+    .healing h2{
+      font-size:48px;
+      color:#2dff95;
+      margin-bottom:25px;
+    }
+
+    .healing p{
+      max-width:900px;
+      margin:auto;
+      line-height:2;
+      font-size:20px;
+      color:#d6d6d6;
+    }
+
+    /* SERVICES */
+
+    .services{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:30px;
+    }
+
+    .service-card{
+      padding:45px 30px;
+      text-align:center;
+      transition:0.5s;
+    }
+
+    .service-card:hover{
+      transform:translateY(-15px);
+    }
+
+    .icon{
+      font-size:65px;
+      margin-bottom:20px;
+    }
+
+    .service-card h3{
+      font-size:28px;
+      margin-bottom:15px;
+      color:#2dff95;
+    }
+
+    .service-card p{
+      color:#d8d8d8;
+      line-height:1.9;
+    }
+
+    /* CONTACT */
+
+    .contact-box{
+      padding:60px;
+    }
+
+    .contact-form{
+      display:grid;
+      gap:25px;
+      margin-top:40px;
+    }
+
+    .contact-form input,
+    .contact-form textarea{
+      width:100%;
+      padding:18px 20px;
+      border:none;
+      outline:none;
+      border-radius:18px;
+      background:rgba(255,255,255,0.06);
+      border:1px solid rgba(255,255,255,0.08);
+      color:white;
+      font-size:16px;
+    }
+
+    .contact-form textarea{
+      height:180px;
+      resize:none;
+    }
+
+    .contact-info{
+      margin-top:40px;
+      text-align:center;
+    }
+
+    .contact-info p{
+      margin:15px 0;
+      color:#ddd;
+      font-size:18px;
+      line-height:1.8;
+    }
+
+    /* FOOTER */
+
+    footer{
+      text-align:center;
+      padding:30px;
+      background:#020805;
+      color:#999;
+      border-top:1px solid rgba(255,255,255,0.08);
+    }
+
+    /* WHATSAPP */
+
+    .whatsapp{
+      position:fixed;
+      right:25px;
+      bottom:25px;
+      width:65px;
+      height:65px;
+      border-radius:50%;
+      background:#25D366;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      font-size:30px;
+      color:white;
+      text-decoration:none;
+      z-index:999;
+      animation:float 2s infinite;
+    }
+
+    @keyframes float{
+
+      0%{
+        transform:translateY(0);
+      }
+
+      50%{
+        transform:translateY(-10px);
+      }
+
+      100%{
+        transform:translateY(0);
+      }
+
+    }
+
+    /* MOBILE */
+
+    @media(max-width:768px){
+
+      nav{
+        flex-direction:column;
+        gap:18px;
+      }
+
+      nav ul{
+        flex-wrap:wrap;
+        justify-content:center;
+      }
+
+      .hero-content h1{
+        font-size:52px;
+      }
+
+      .hero-content p{
+        font-size:18px;
+      }
+
+      .title{
+        font-size:38px;
+      }
+
+      .healing h2{
+        font-size:34px;
+      }
+
+      .healing p{
+        font-size:18px;
+      }
+
+      .contact-box{
+        padding:35px 25px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <!-- LOADER -->
+
+  <div id="loader">
+
+    <div class="loader-circle"></div>
+
+    <h2 style="color:#2dff95;">
+      प्रियदर्शी निसर्गोपचार केंद्र
+    </h2>
+
+  </div>
+
+  <!-- PARTICLES -->
+
+  <div class="particles">
+
+    <span style="left:10%;animation-duration:12s;"></span>
+    <span style="left:25%;animation-duration:18s;"></span>
+    <span style="left:40%;animation-duration:14s;"></span>
+    <span style="left:60%;animation-duration:20s;"></span>
+    <span style="left:75%;animation-duration:16s;"></span>
+    <span style="left:90%;animation-duration:22s;"></span>
+
+  </div>
+
+  <!-- NAVBAR -->
+
+  <nav>
+
+    <div class="logo">प्रियदर्शी</div>
+
+    <ul>
+
+      <li><a href="#home">होम</a></li>
+      <li><a href="#about">माहिती</a></li>
+      <li><a href="#services">उपचार</a></li>
+      <li><a href="#contact">संपर्क</a></li>
+
+    </ul>
+
+  </nav>
+
+  <!-- HERO -->
+
+  <section class="hero" id="home">
+
+    <div class="hero-content">
+
+      <h3>Reiki Grandmaster</h3>
+
+      <h1>
+        प्रियदर्शी <br>
+        निसर्गोपचार केंद्र
+      </h1>
+
+      <p>
+        शरीर, मन आणि आत्म्याचा समतोल राखण्यासाठी
+        नैसर्गिक उपचार, सकारात्मक ऊर्जा आणि मानसिक शांततेचा अनुभव.
+      </p>
+
+      <a href="#contact" class="btn">
+        अपॉइंटमेंट बुक करा
+      </a>
+
+    </div>
+
+  </section>
+
+  <!-- ABOUT -->
+
+  <section id="about">
+
+    <h2 class="title">आमच्याबद्दल</h2>
+
+    <div class="about">
+
+      <div class="about-card glass">
+
+        <h3>नैसर्गिक उपचार</h3>
+
+        
+          <p>
+  सकारात्मक ऊर्जा आणि निरोगी जीवनासाठी
+  निसर्गाशी जोडलेली उपचार पद्धती.
+</p>
+        
+
+      </div>
+
+      <div class="about-card glass">
+
+        <h3>मानसिक शांतता</h3>
+
+        <p>
+          निरोगी शरीर, शांत मन आणि
+          सकारात्मक जीवनासाठी
+          नैसर्गिक उपचारांचा विश्वासार्ह मार्ग.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- HEALING -->
+
+  <section>
+
+    <div class="healing glass">
+
+      <h2>
+        निसर्गातून आरोग्याचा खरा मार्ग
+      </h2>
+
+      <p>
+        संगीत थेरपी, जल चिकित्सा, चुंबक चिकित्सा,
+        नाडी परीक्षण, Reiki Healing आणि इतर नैसर्गिक उपचार
+        पद्धतीद्वारे निरोगी आणि आनंदी जीवनाचा अनुभव घ्या.
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- SERVICES -->
+
+  <section id="services">
+
+    <h2 class="title">आमचे उपचार</h2>
+
+    <div class="services">
+
+      <div class="service-card glass">
+
+        <div class="icon">🎵</div>
+
+        <h3>संगीत थेरपी</h3>
+
+        <p>
+          मानसिक शांतता आणि सकारात्मक ऊर्जा मिळवा.
+        </p>
+
+      </div>
+
+      <div class="service-card glass">
+
+        <div class="icon">🧲</div>
+
+        <h3>चुंबक चिकित्सा</h3>
+
+        <p>
+          नैसर्गिक चुंबकीय उपचारांनी आरोग्य सुधारणा.
+        </p>
+
+      </div>
+
+      <div class="service-card glass">
+
+        <div class="icon">💧</div>
+
+        <h3>जल चिकित्सा</h3>
+
+        <p>
+          पाण्याद्वारे शरीर शुद्धीकरण आणि उपचार.
+        </p>
+
+      </div>
+
+      <div class="service-card glass">
+
+        <div class="icon">🌿</div>
+
+        <h3>पारंपरिक चिकित्सा</h3>
+
+        <p>
+          सुरक्षित आणि प्रभावी नैसर्गिक उपचार पद्धती.
+        </p>
+
+      </div>
+
+      <div class="service-card glass">
+
+        <div class="icon">🩺</div>
+
+        <h3>नाडी परीक्षण</h3>
+
+        <p>
+          शरीरातील आरोग्य स्थिती ओळखण्यासाठी उपचार.
+        </p>
+
+      </div>
+
+      <div class="service-card glass">
+
+        <div class="icon">✨</div>
+
+        <h3>Reiki Healing</h3>
+
+        <p>
+          सकारात्मक ऊर्जा आणि मानसिक शांततेसाठी उपचार.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- CONTACT -->
+
+  <section id="contact">
+
+    <h2 class="title">संपर्क करा</h2>
+
+    <div class="contact-box glass">
+
+      <form class="contact-form" onsubmit="sendToWhatsapp(); return false;">
+
+        <input type="text" id="name" placeholder="आपले नाव" required>
+
+        <input type="tel" id="phone" placeholder="मोबाईल नंबर" required>
+
+        <textarea id="message" placeholder="आपला मेसेज" required></textarea>
+
+        <button type="submit" class="btn">
+
+          WhatsApp Message
+
+        </button>
+
+      </form>
+
+      <div class="contact-info">
+
+        <p>📞 9158649457</p>
+
+        <p>
+          📍 "प्रियदर्शी निवास", स्टेशन रोड रोटेगाव,<br>
+          ता. वैजापूर, जि. छ. संभाजीनगर
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- WHATSAPP -->
+
+  <a href="https://wa.me/919158649457" class="whatsapp">
+
+    ☎
+
+  </a>
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    © 2026 प्रियदर्शी निसर्गोपचार केंद्र | Designed By Apratim
+
+  </footer>
+
+  <!-- SCRIPT -->
+
+  <script>
+
+    // LOADER
+
+    window.addEventListener("load",()=>{
+
+      document.getElementById("loader").style.display="none";
+
+    });
+
+    // WHATSAPP MESSAGE
+
+    function sendToWhatsapp(){
+
+      let name = document.getElementById("name").value;
+      let phone = document.getElementById("phone").value;
+      let message = document.getElementById("message").value;
+
+      let whatsappMessage =
+`नवीन Appointment Request
+
+👤 नाव: ${name}
+
+📞 मोबाईल: ${phone}
+
+💬 मेसेज: ${message}`;
+
+      let whatsappURL =
+"https://wa.me/919158649457?text="
++ encodeURIComponent(whatsappMessage);
+
+      window.open(whatsappURL, '_blank');
+
+    }
+
+    // SCROLL REVEAL
+
+    ScrollReveal({
+
+      distance:'80px',
+      duration:2000,
+      delay:200,
+      reset:false
+
+    });
+
+    ScrollReveal().reveal('.hero-content',{origin:'top'});
+    ScrollReveal().reveal('.title',{origin:'left'});
+    ScrollReveal().reveal('.about-card',{origin:'bottom',interval:200});
+    ScrollReveal().reveal('.healing',{origin:'bottom'});
+    ScrollReveal().reveal('.service-card',{origin:'bottom',interval:150});
+    ScrollReveal().reveal('.contact-box',{origin:'bottom'});
+
+  </script>
+
+</body>
+
+</html>
